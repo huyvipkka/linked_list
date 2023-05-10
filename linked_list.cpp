@@ -101,14 +101,14 @@ int Pop(Node* &head, int index){
         return 0;
     }
     else{
-        Node* before = NULL;
-        Node* after = head;
-        for(int i = 0; i < index; i++){
-            before = after;
-            after = after->next;
+        Node* p = head;
+        while (index > 1){
+            p = p->next;
+            index--;
         }
-        before->next = after->next;
-        return 0;
+        Node* after = p->next;
+        p->next = after->next;
+        return 1;
     }
 }
 
