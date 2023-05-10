@@ -108,7 +108,7 @@ int Pop(Node* &head, int index){
         }
         Node* after = p->next;
         p->next = after->next;
-        return 1;
+        return 0;
     }
 }
 
