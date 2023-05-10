@@ -17,9 +17,9 @@ struct SV
 };
 
 void NhapSV(SV &a){
+    fflush(stdin);
     std::cout << "Nhap ten sv: ";
     std::getline(std::cin, a.name);
-    fflush(stdin);
     std::cout << "Nhap tuoi sv: ";
     std::cin >> a.age;
 }
@@ -27,10 +27,16 @@ void NhapSV(SV &a){
 SV CreateRandomSV(){
     SV a;
     a.name = surnames[getRandomNumber(0,9)] + " " + names[getRandomNumber(0,9)];
-    a.age = getRandomNumber(18, 28);
+    a.age = getRandomNumber(12, 48);
     return a;
 }
 
 void InSV(SV a){
     std::cout << "|" << std::left << std::setw(25) << a.name << "|" << std::setw(10) << a.age << "|" << std::endl;
+}
+
+void InSV2(SV a){
+    std::cout << "+-------------------------+----------+\n";
+    std::cout << "|" << std::left << std::setw(25) << a.name << "|" << std::setw(10) << a.age << "|" << std::endl;
+    std::cout << "+-------------------------+----------+\n";
 }

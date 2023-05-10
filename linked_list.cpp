@@ -13,16 +13,33 @@ Node* MakeNode(SV a){
     return P;
 }
 
-Node* QuickCreateNode(int n){
-    if(n <= 0){
-        return NULL;
+void Append(Node* &head, SV a){
+    if (head == NULL)
+        head = MakeNode(a);
+    else{
+        Node* t = MakeNode(a);
+        Node* p = head;
+        while(p->next != NULL)
+            p = p->next;
+        p->next = t;
     }
-    Node* head = MakeNode(CreateRandomSV());
-    Node* a = head;
+}
+
+Node* QuickCreateNode(int n){
+    Node* head = NULL;
     while(n > 0){
-        Node* tmp = MakeNode(CreateRandomSV());
-        a->next = tmp;
-        a = a->next;
+        Append(head, CreateRandomSV());
+        n--;
+    }
+    return head;
+}
+
+Node* NodeInput(int n){
+    Node* head = NULL;
+    for(;n > 0;){
+        SV a;
+        NhapSV(a);
+        Append(head, a);
         n--;
     }
     return head;
@@ -30,14 +47,99 @@ Node* QuickCreateNode(int n){
 
 void PrintNode(Node* head){
     Node* a = head;
-    std::cout << "+-------------------------+----------+\n";
-    std::cout << "|" << std::left << std::setw(25) << "Ten sv" << "|" << std::setw(10) << "Tuoi" << "|" << std::endl;
-    std::cout << "+-------------------------+----------+\n";
+    std::cout << "+------+-------------------------+----------+\n";
+    std::cout << std::left << "|" << std::setw(6) << "STT" << "|" << std::setw(25) << "Ten sv" << "|" << std::setw(10) << "Tuoi" << "|" << std::endl;
+    std::cout << "+------+-------------------------+----------+\n";
+    int i = 1;
     while (a != NULL)
     {
+        std::cout << std::left << "|" << std::setw(6) << i;
         InSV(a->data);
         a = a->next;
+        i++;
     }
-    std::cout << "+-------------------------+----------+\n";
+    std::cout << "+------+-------------------------+----------+\n";
 }
 
+
+int Count(Node* head){
+    int cnt = 0;
+    Node* p = head;
+    while (p != NULL){
+        cnt++;
+        p = p->next;
+    }
+    return cnt;
+}
+
+int Insert(Node* &head, SV a, int index){
+    if(index < 0 || index > Count(head))
+        return -1;
+    else if(index == 0){
+        Node* t = new Node;
+        t->data = a;
+        t->next = head;
+        head = t;
+        return 0;
+    }
+    else{
+        Node* p = head;
+        Node* t = MakeNode(a);
+        for(int i = 0; i < index-1; i++)
+            p = p->next;
+        t->next = p->next;
+        p->next = t;
+        return 0;
+    }
+}
+
+int Pop(Node* &head, int index){
+    if(index < 0 || index >= Count(head))
+        return -1;
+    else if(index == 0){
+        head = head->next;
+        return 0;
+    }
+    else{
+        Node* before = NULL;
+        Node* after = head;
+        for(int i = 0; i < index; i++){
+            before = after;
+            after = after->next;
+        }
+        before->next = after->next;
+        return 0;
+    }
+}
+
+void Sort(Node* head){
+    if (head == NULL || head->next == NULL)
+        return;
+
+    Node* current;
+    Node* last = NULL;
+    bool swapped;
+    do{
+        current = head;
+        swapped = false;
+        while (current->next != last)
+        {
+            if(current->data.age > current->next->data.age)
+                std::swap(current->data, current->next->data);
+            swapped = true;
+            current = current->next;
+        }
+        last = current;
+    }while(swapped);
+}
+
+SV* Search(Node* head, std::string name){
+    Node* p = head;
+    while (p != NULL)
+    {
+        if(p->data.name == name)
+            return &(p->data);
+        p = p->next;
+    }
+    return NULL;
+}
