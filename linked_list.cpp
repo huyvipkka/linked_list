@@ -45,6 +45,17 @@ Node* NodeInput(int n){
     return head;
 }
 
+void NodeInput(Node* &head, std::string stopStr){
+    head = NULL;
+    while(true){
+        SV a;
+        NhapSV2(a, stopStr);
+        if(a.name == stopStr)
+            return;
+        Append(head, a);
+    }
+}
+
 void PrintNode(Node* head){
     Node* a = head;
     std::cout << "+------+-------------------------+----------+\n";

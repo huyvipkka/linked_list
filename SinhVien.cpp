@@ -17,9 +17,19 @@ struct SV
 };
 
 void NhapSV(SV &a){
-    fflush(stdin);
+    std::cin.ignore();
     std::cout << "Nhap ten sv: ";
     std::getline(std::cin, a.name);
+    std::cout << "Nhap tuoi sv: ";
+    std::cin >> a.age;
+}
+
+void NhapSV2(SV &a, std::string stopStr){
+    std::cin.ignore();
+    std::cout << "Nhap ten sv: ";
+    std::getline(std::cin, a.name);
+    if(a.name == stopStr)
+        return;
     std::cout << "Nhap tuoi sv: ";
     std::cin >> a.age;
 }

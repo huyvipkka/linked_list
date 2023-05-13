@@ -12,6 +12,7 @@ int main(){
     std::cout << "| 4.Xoa sv tai vi tri trong ds va in ra               |\n";
     std::cout << "| 5.Sap xep ds theo tuoi tang dan                     |\n";
     std::cout << "| 6.Tim kiem theo ten va in ra sv dau tien            |\n";
+    std::cout << "| 7.Test nhap dl kieu 2 (ten = *** de out)            |\n";
     std::cout << "| 0.Thoat                                             |\n";
     std::cout << "+-----------------------------------------------------+\n";
     int choose;
@@ -20,7 +21,7 @@ int main(){
         do{
             std::cout << "Nhap lua chon: ";
             std::cin >> choose;
-        }while(choose < 0 || choose > 6);
+        }while(choose < 0 || choose > 7);
         switch (choose)
         {
             case 1:
@@ -69,6 +70,9 @@ int main(){
                 else
                     InSV2(*Search(head, name));
                 break;
+            case 7:
+                NodeInput(head, "***");
+                PrintNode(head);
             default:
                 run = false;
                 break;
