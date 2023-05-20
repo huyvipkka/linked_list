@@ -57,16 +57,15 @@ void NodeInput(Node* &head, std::string stopStr){
 }
 
 void PrintNode(Node* head){
-    Node* a = head;
     std::cout << "+------+-------------------------+----------+\n";
     std::cout << std::left << "|" << std::setw(6) << "STT" << "|" << std::setw(25) << "Ten sv" << "|" << std::setw(10) << "Tuoi" << "|" << std::endl;
     std::cout << "+------+-------------------------+----------+\n";
     int i = 1;
-    while (a != NULL)
+    while (head != NULL)
     {
         std::cout << std::left << "|" << std::setw(6) << i;
-        InSV(a->data);
-        a = a->next;
+        InSV(head->data);
+        head = head->next;
         i++;
     }
     std::cout << "+------+-------------------------+----------+\n";
@@ -75,10 +74,9 @@ void PrintNode(Node* head){
 
 int Count(Node* head){
     int cnt = 0;
-    Node* p = head;
-    while (p != NULL){
+    while (head != NULL){
         cnt++;
-        p = p->next;
+        head = head->next;
     }
     return cnt;
 }
@@ -145,12 +143,11 @@ void Sort(Node* head){
 }
 
 SV* Search(Node* head, std::string name){
-    Node* p = head;
-    while (p != NULL)
+    while (head != NULL)
     {
-        if(p->data.name == name)
-            return &(p->data);
-        p = p->next;
+        if(head->data.name == name)
+            return &(head->data);
+        head = head->next;
     }
     return NULL;
 }
